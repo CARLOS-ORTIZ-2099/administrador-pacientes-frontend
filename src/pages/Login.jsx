@@ -30,29 +30,29 @@ export const Login = () => {
 
 
   return (
-    <Box display='flex' justifyContent='center' border={'solid green 3px'}
+    <Box display='flex' justifyContent='center' /* border={'solid green 3px'} */
     minH={'100vh'} alignItems={'center'}
     >
-        <Box display={'flex'}  border={'solid red 4px'} width={{base : '100%', sm  : 'auto'}}
+        <Box display={'flex'} boxShadow={'15px 15px 15px rgba(0,0,0,.5)'} width={{base : '100%', sm  : 'auto'}}
         h={{base : '100vh', sm : 'auto'}}
         >
             
-            <Box border={'solid green 3px'} display={{base : 'none', sm : 'block'}} flex={'1 1 0'}>
+            <Box /* border={'solid green 3px'} */ display={{base : 'none', sm : 'block'}} flex={'1 1 0'}>
                 <Image src={medico}  boxSize='600px'
                     objectFit='contain'/>
                 
             </Box>
 
             <Box  
-                border={'solid cyan 3px'} flex={'1 1 0'}       
+                /* border={'solid cyan 3px'} */ flex={'1 1 0'}       
                 display={'flex'} flexDirection={'column'} alignItems={'center'}
                 justifyContent={'space-evenly'}
             >
-                <Box  border={'solid orange 3px'}>
-                        <Text>logueate</Text>
+                <Box  /* border={'solid orange 3px'} */>
+                        <Text fontWeight={'bolder'}>logueate</Text>
                 </Box>
 
-               <Box onSubmit={sendData} as="form" noValidate  border={'solid blue 3px'} w={'80%'}  h={'70%'} 
+               <Box onSubmit={sendData} as="form" noValidate  /* border={'solid blue 3px'} */ w={'80%'}  h={'70%'} 
                 display={'flex'} flexDirection={'column'} justifyContent={'space-evenly'} alignItems={'center'}
                >
                     <Input onChange={changeFields}  h={'30px'} 

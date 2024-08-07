@@ -1,6 +1,9 @@
-/* eslint-disable react-refresh/only-export-components */
 /* eslint-disable react/prop-types */
+/* eslint-disable react-refresh/only-export-components */
+
 import { createContext, useContext, useState } from "react"
+import {  deletePatientFetch, getPatientsFecth, createPatientFetch, editPatientFetch } from "../libs/api/patients"
+
 
 
 export const PatientsContext = createContext()
@@ -13,40 +16,19 @@ export const PatientsProvider = ({children}) => {
   
   const getPatients = async (url = '', id ='') => {  
     try{ 
-        const response = await fetch(`http://localhost:5000/api/patient/get-patients`+url+id, {  
-          method : 'GET',
-          credentials: 'include'
-        })
-        //console.log(response);
-        if(!response.ok) {
-          let error = await response.json() 
-          //console.log(error);  
-          throw error
-        }
-        const data = await response.json()
-        console.log(data);
-        setPatients(data)
+      const response = await getPatientsFecth(url, id)
+      console.log(response);
+      setPatients(response)
     }
     catch(error) {
-      console.log(error); 
+      console.log(error);
     }
 
   } 
 
   const deletePatient = async (id) => {
     try{
-      const response = await fetch(`http://localhost:5000/api/patient/delete-patient/${id}`, {  
-        method : 'DELETE',
-        credentials: 'include'
-      })
-      //console.log(response);
-      if(!response.ok) {
-        let error = await response.json()  
-        //console.log(error);  
-        throw error
-      }
-      const data = await response.json()
-      console.log(data);
+      const data = await deletePatientFetch(id)
       const patientsFilter = patients.filter(patient => patient._id !== data._id)
       setPatients(patientsFilter)
   }
@@ -58,56 +40,33 @@ export const PatientsProvider = ({children}) => {
 
   const createPatient = async (fields) => {
     try{
-      const response = await fetch(`http://localhost:5000/api/patient/create-patient/`, { 
-        method : 'POST', 
-        credentials: 'include',
-        headers : {'Content-Type': 'application/json'},
-        body : JSON.stringify(fields)
-      })
-      //console.log(response);
-      if(!response.ok) {
-        let error = await response.json() 
-        //console.log(error);  
-        throw error
-      }
-      const data = await response.json()
+      const data = await createPatientFetch(fields)
       console.log(data);
-      //setPatients(data)
-    }
+      return data
+    } 
     catch(error) {
-      console.log(error); 
+      console.log(error);
       setErrors(error)
       setTimeout(() => {
         setErrors({})
-      }, 2000)
+      }, 2000) 
     }
     
   }
-
+ 
   const editPatient = async (fields) => { 
       try{
-        const response = await fetch(`http://localhost:5000/api/patient/update-patient/${fields._id}`, { 
-          method : 'PUT', 
-          credentials: 'include',
-          headers : {'Content-Type': 'application/json'},
-          body : JSON.stringify(fields)
-        })
-        //console.log(response);
-        if(!response.ok) {
-          let error = await response.json() 
-          //console.log(error);  
-          throw error
-        }
-        const data = await response.json()
+        const data = await editPatientFetch(fields)  
         console.log(data);
         setPatients((prev) => prev.map(patient => patient._id === data._id ? {...data} : patient))
       }
       catch(error) { 
         console.log(error); 
+        throw error  
       }  
   }
  
-  const data = {patients, setPatients, getPatients, deletePatient, createPatient, errors, editPatient} 
+  const data = {patients, setPatients, getPatients, deletePatient, createPatient, errors, editPatient, setErrors } 
 
   return (
     <PatientsContext.Provider value={data}>

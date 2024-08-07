@@ -1,90 +1,80 @@
-import { Box, Button, Input, Text } from "@chakra-ui/react"
+import { Box, Button, Container, FormControl, FormLabel, Input, Text } from "@chakra-ui/react"
 import { useEditForm } from "../hooks/useEditForm"
 import { useDoctor } from "../context/DoctorProvider"
 
 
 export const EditDoctor = () => { 
 
-  const {updateDoctor}  = useDoctor()
+  const {updateDoctor, errors}  = useDoctor()
   const {fieldsActive, handlerFieldsActive} = useEditForm()
 
-  function sendData  (e) { 
+  const sendData = async (e) => { 
     e.preventDefault() 
-    updateDoctor(fieldsActive) 
+    try{
+     const data = await updateDoctor(fieldsActive)
+     if(data) {
+      e.target.reset()
+      alert('se edito el perfil')
+     }
+    }catch(error){
+      console.log(error);
+      
+    }
+   
   }
 
   return (
     <>
-        <Box display='flex' justifyContent='center' border={'solid green 3px'}
-      minH={'100vh'} alignItems={'center'}
-      >
-          <Box display={'flex'}  border={'solid red 4px'} width={{base : '100%', sm  : '350px'}}
-          h={{base : '100vh', sm : '750px'}}
-          >
+        <Container  mt={'4rem'}>
+          <Text>crear paciente</Text>
+          <Box onSubmit={sendData} as="form" noValidate>
+                <FormControl>
+                    <FormLabel>name</FormLabel>
+                    <Input type="text" placeholder='name' name="name"
+                        onChange={handlerFieldsActive}
+                    />
+                </FormControl>
 
-            <Box  
-                  border={'solid cyan 3px'} flex={'1 1 0'}       
-                  display={'flex'} flexDirection={'column'} alignItems={'center'}
-                  justifyContent={'space-evenly'}
-              >
-                  <Box  border={'solid orange 3px'}>
-                          <Text>editar doctor</Text>
-                  </Box>
- 
-                <Box  onSubmit={sendData} as="form" noValidate  border={'solid blue 3px'} w={'80%'}  h={'70%'} 
-                  display={'flex'} flexDirection={'column'} justifyContent={'space-evenly'} alignItems={'center'}
-                >
-                      <Input onChange={handlerFieldsActive}  
-                      h={'30px'} w={{base : '90%', md  : '70%'}}   name="email" type="email" placeholder="email"/>
-                      {
-                        //errors?.email && <Text fontSize={'xs'} color={'tomato'}>{errors.email}</Text>
-                      }
+                <FormControl mt={4}>
+                    <FormLabel>Last name</FormLabel>
+                    <Input type="text" placeholder='Last name' name="lastName" 
+                        onChange={handlerFieldsActive}
+                    />
+                </FormControl>
 
-                     <Input onChange={handlerFieldsActive}
-                      h={'30px'} w={{base : '90%', md  : '70%'}} name="password" type="text" placeholder="password"
-                      />
-                      
-                      {
-                        /* errors?.password && <Text fontSize={'xs'} color={'tomato'}>{errors.password}</Text> */
-                      }
-   
+                <FormControl mt={4}>
+                    <FormLabel>email</FormLabel>
+                    <Input type="email" placeholder='email' name="email"
+                        onChange={handlerFieldsActive}
+                    />
+                </FormControl>
 
-                      <Input onChange={handlerFieldsActive}
-                      h={'30px'} w={{base : '90%', md  : '70%'}} name="lastName" type="text" placeholder="lastName"/>
-
-                      {
-                        //errors?.lastName && <Text fontSize={'xs'} color={'tomato'}>{errors.lastName}</Text>
-                      }
-
-                      <Input onChange={handlerFieldsActive}
-                      h={'30px'} w={{base : '90%', md  : '70%'}} 
-                      name="name" type="text" placeholder="name"
-                      />
-
-                      {
-                        //errors?.name && <Text fontSize={'xs'} color={'tomato'}>{errors.name}</Text>
-                      }
+                <FormControl mt={4}>
+                    <FormLabel>password</FormLabel>
+                    <Input type="email" placeholder='password' name="password"
+                        onChange={handlerFieldsActive}
+                    />
+                </FormControl>
+                <FormControl mt={4}>
+                    <FormLabel>file</FormLabel>
+                    <Input type="file" placeholder='file' name="file"
+                        onChange={handlerFieldsActive}
+                    />
+                </FormControl>
 
 
-                      <Input onChange={handlerFieldsActive} type="file" w={{base : '90%', md  : '70%'}} 
-                        name="file"
-                      />
-                  
-
-                      <Button type="submit" colorScheme="blue"
-                        h={'35px'} w={{base : '90%', md  : '70%'}}
-                        
+                {
+                  errors.message && <Text fontSize={'xs'} color={'tomato'}>{errors.message}</Text>
+                }
+                <Button display={'block'} type="submit" colorScheme="blue"  m={'2rem auto'}
+                      h={'35px'} w={{base : '90%', md  : '50%'}}    
                       >
                         send data
-                      </Button>
-                </Box>
-                   
-                  
-            </Box>
+                </Button>
 
           </Box>
           
-    </Box>
+        </Container>
     </>
   )
 }

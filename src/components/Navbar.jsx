@@ -11,7 +11,6 @@ export const Navbar = () => {
   const [openNavbar, setOpenNavbar] = useState(false)
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);  
   const {logout, user} = useAuth()  
-    console.log(user);
     
   const changeShowModal = () => {
     console.log('cambiando'); 
@@ -31,12 +30,12 @@ export const Navbar = () => {
    }, [windowWidth]);
 
   return (
-    <Box as="nav" border={'solid blue 2px'} display={'flex'} minH={'10vh'}
-        alignItems={'center'} justifyContent={'end'} bg={'red'}
+    <Box as="nav" /* border={'solid blue 2px'} */ display={'flex'} minH={'10vh'}
+        alignItems={'center'} justifyContent={'end'} bg={'#233d4d'}
         position={{base : openNavbar && 'fixed', md  : 'static' } }
         top={'0'} w={'100%'} zIndex={'999'}
     >
-        <Box border={'solid violet 2px'} p={'7px'} as="span" display={{base :'block', md : 'none'}} marginRight={'20px'}
+        <Box /* border={'solid violet 2px'} */ p={'7px'} as="span" display={{base :'block', md : 'none'}} marginRight={'20px'}
         cursor={'pointer'}
         >
             <FontAwesomeIcon icon={faBars} size="2xl" 
@@ -44,16 +43,16 @@ export const Navbar = () => {
             />
         </Box>
 
-        <Box textAlign={'center'} display={{base :'none', md : 'block'}} as="span" w={'10%'}  border={'solid red 2px'}>
-            <Avatar  border={'solid orange 1px'} size={'lg'} 
+        <Box textAlign={'center'} display={{base :'none', md : 'block'}} as="span" w={'10%'}  /* border={'solid red 2px'} */>
+            <Avatar  /* border={'solid orange 1px'} */ size={'lg'} 
                 name={`${user.name + ' '+ user.lastName}`}
                 src={`http://localhost:5000/image/${user.file}`}
             >
             </Avatar>
         </Box>
         
-        <Box as="ul"  border={'solid green 3px'}  
-            display={{base : openNavbar ? 'block' : 'none' , md : 'flex'}}
+        <Box as="ul"  /* border={'solid green 3px'} */  
+            display={{base : openNavbar ? 'flex' : 'none' , md : 'flex'}}
             position={{base : openNavbar && 'fixed', md  : 'static' } } 
             top={openNavbar && '10vh'}
             justifyContent={'space-around'} alignItems={'center'}
@@ -63,7 +62,10 @@ export const Navbar = () => {
             left={0}
             right={0}
             zIndex={'999'}
-            bg={{base : 'blue', md : 'none'}}
+            bg={{base : 'rgba(0,0,0,0.7)', md : 'none'}}
+            color={'aliceblue'}
+            flexDirection={{base : openNavbar ? 'column' : 'auto' , md : 'flex'}}
+            
         >
             <Box as="li">
                 <Link to={'/home'}>home</Link>

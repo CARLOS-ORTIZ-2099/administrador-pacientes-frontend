@@ -6,17 +6,17 @@ import { usePatients } from "../context/PatientsProvider";
 
 export const CardColleague = ({colleague}) => {
     console.log(colleague); 
-    const { isOpen, onOpen, onClose } = useDisclosure()
+    const { isOpen, onOpen, onClose } = useDisclosure() 
     const {getPatients, patients} = usePatients()
     
   return (
-    <>
-        <Card maxW='md' border={'solid blue 2px'}>
+    <> 
+        <Card maxW='md' /* border={'solid blue 2px'} */>
             
             <CardHeader>
                 <Flex spacing='4'>
                     <Flex flex='1' gap='4' alignItems='center' flexWrap='wrap'>
-                        <Avatar name={`${colleague.name+ ' '+colleague.lastName}`} src='https://bit.ly/sage-adebayo' />
+                        <Avatar name={`${colleague.name+ ' '+colleague.lastName}`} src={'http://localhost:5000/image/'+colleague.file} />
                 
                         <Box>
                             <Heading size='sm'>

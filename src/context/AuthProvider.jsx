@@ -1,10 +1,9 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable react-refresh/only-export-components */
 import { createContext, useContext, useEffect, useState } from "react"
-import { loginRegisterFetch } from "../libs/loginRegisterFetch"
 import jsCookie from 'js-cookie'
-import { logoutFetch } from "../libs/logoutFetch"
-import { veryfyFetch } from "../libs/verifyAuthFetch"
+import { loginRegisterFetch, logoutFetch, veryfyFetch } from "../libs/api/auth"
+
 
 const AuthContext = createContext()
 

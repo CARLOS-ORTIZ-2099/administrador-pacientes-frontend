@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
-import { Button, FormControl, FormLabel, Input, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay } from "@chakra-ui/react"
-import { useRef } from "react"
+import { Button, FormControl, FormLabel, Input, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Text } from "@chakra-ui/react"
+import { useRef, useState } from "react"
 import { usePatients } from "../context/PatientsProvider"
  
 
@@ -9,7 +9,19 @@ export const ModalEditPatient = ({isOpen, onClose, fields, handlerFields}) => {
     const {editPatient} = usePatients()
     const initialRef = useRef(null)
     const finalRef = useRef(null)  
- 
+    
+    const [error , setError] = useState(null)
+    const saveChange = async() => {
+        try { 
+           await editPatient(fields) 
+           alert('creado')   
+           onClose()
+        }catch(error) {
+            console.log(error);
+            setError(error.message)
+        } 
+    }
+
   return (
     <>
         <Modal 
@@ -28,7 +40,7 @@ export const ModalEditPatient = ({isOpen, onClose, fields, handlerFields}) => {
                     <Input ref={initialRef} placeholder='name' 
                         defaultValue={fields.name} name="name"
                         onChange={handlerFields}
-                    />{/* falta aqui */}
+                    />
                 </FormControl>
                 <FormControl mt={4}>
                     <FormLabel>Last name</FormLabel>
@@ -43,6 +55,9 @@ export const ModalEditPatient = ({isOpen, onClose, fields, handlerFields}) => {
                         defaultValue={fields.email} name="email"
                         onChange={handlerFields}
                     />
+                    {
+                        error && <Text color={'tomato'}>{error}</Text>
+                    }
                 </FormControl>
                 <FormControl mt={4}>
                     <FormLabel>symptoms</FormLabel>
@@ -56,11 +71,7 @@ export const ModalEditPatient = ({isOpen, onClose, fields, handlerFields}) => {
 
                 <ModalFooter>
                     <Button colorScheme='blue' mr={3}
-                        onClick={() => {
-                            editPatient(fields)
-                            onClose()
-                        }} 
-                    >
+                        onClick={saveChange} >
                         Save
                     </Button>
                     <Button onClick={onClose}>Cancel</Button>

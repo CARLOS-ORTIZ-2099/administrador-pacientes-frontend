@@ -33,23 +33,23 @@ export const Register = () => {
 
   return (
     <>
-      <Box display='flex' justifyContent='center' border={'solid green 3px'}
+      <Box display='flex' justifyContent='center' /* border={'solid green 3px'} */
       minH={'100vh'} alignItems={'center'}
       >
-          <Box display={'flex'}  border={'solid red 4px'} width={{base : '100%', sm  : '350px'}}
+          <Box display={'flex'} boxShadow={'3px 3px 15px rgba(0,0,0,.5)'} width={{base : '100%', sm  : '350px'}}
           h={{base : '100vh', sm : '750px'}}
           >
 
             <Box  
-                  border={'solid cyan 3px'} flex={'1 1 0'}       
+                  /* border={'solid cyan 3px'} */ flex={'1 1 0'}       
                   display={'flex'} flexDirection={'column'} alignItems={'center'}
                   justifyContent={'space-evenly'}
               >
-                  <Box  border={'solid orange 3px'}>
+                  <Box  /* border={'solid orange 3px'} */>
                           <Text>registrate</Text>
                   </Box>
 
-                <Box  onSubmit={sendData} as="form" noValidate  border={'solid blue 3px'} w={'80%'}  h={'70%'} 
+                <Box  onSubmit={sendData} as="form" noValidate  /* border={'solid blue 3px'} */ w={'80%'}  h={'70%'} 
                   display={'flex'} flexDirection={'column'} justifyContent={'space-evenly'} alignItems={'center'}
                 >
                       <Input onChange={changeFields}  
@@ -97,8 +97,7 @@ export const Register = () => {
                         errorsRegister?.message && <Text fontSize={'xs'} color={'tomato'}>{errorsRegister.message}</Text>
                       }
                 </Box>
-                   
-                  
+                                
             </Box>
 
           </Box>

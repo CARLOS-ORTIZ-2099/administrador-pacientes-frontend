@@ -20,7 +20,7 @@ export const Colleagues = () => {
            <Box display={'flex'} flexWrap={'wrap'} gap={{base : '3rem', md : '1rem'}}
             p={'1rem'}
             justifyContent={'space-evenly'}
-            border={'solid green 2px'}
+            /* border={'solid green 2px'} */
            >
               {
                 doctors.map((colleague) => (

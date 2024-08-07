@@ -8,8 +8,8 @@ import { useEditForm } from "../hooks/useEditForm"
 export const CardPatient = ({patient}) => { 
 
   const {deletePatient} = usePatients() 
-  const sendDeletepatient = (id) => deletePatient(id)
-  const {fieldsActive, handlerFieldsActive, setFieldsActive} =  useEditForm()
+ /*  const sendDeletepatient = (id) => deletePatient(id) */
+  const {fieldsActive, setFieldsActive, handlerFieldsActive} =  useEditForm()
 
   const showModal = (data) => {
       console.log(data);
@@ -22,7 +22,7 @@ export const CardPatient = ({patient}) => {
   
   return (
     <>
-    <Card maxW='md' /* border={'solid blue 2px'} */ /* maxH={'350px'} */>
+    <Card maxW='md'>
         
         <CardHeader>
             <Flex spacing='4'>
@@ -32,7 +32,7 @@ export const CardPatient = ({patient}) => {
                     <Box>
                         <Heading size='sm'>
                             paciente
-                            <Text>{patient?.name} {patient?.lastName}</Text>
+                            <Text>{`${patient?.name+' '+patient?.lastName}`}</Text>
                             
                         </Heading>
                         
@@ -57,7 +57,7 @@ export const CardPatient = ({patient}) => {
             }}
             gap={'10px'}
         >
-            <Button onClick={() => sendDeletepatient(patient._id)} flex='1' colorScheme="red">
+            <Button onClick={() => deletePatient(patient._id)} flex='1' colorScheme="red">
                 delete
             </Button>
             <Button onClick={() => showModal(patient)} flex='1' colorScheme="blue">
