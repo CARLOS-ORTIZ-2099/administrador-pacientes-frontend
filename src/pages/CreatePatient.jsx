@@ -14,7 +14,7 @@ export const CreatePatient = () => {
             const res = await createPatient(fields)
             if(res){
                 e.target.reset()
-                alert('creado')
+                alert('creado correctamente')
             }    
         }catch(error) {
             console.log(error);      

@@ -60,7 +60,7 @@ export const Login = () => {
                     />
 
                     <Input onChange={changeFields} h={'30px'} w={{base : '90%', md  : '70%'}} name="password" 
-                        type="text" placeholder="emapasswordl"
+                        type="text" placeholder="password"
                     />
                     <Button type="submit" colorScheme="blue"
                         h={'35px'} w={{base : '90%', md  : '70%'}}

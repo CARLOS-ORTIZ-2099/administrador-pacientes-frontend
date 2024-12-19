@@ -31,6 +31,7 @@ function App() {
                         <Route path='/create/patient' element={<CreatePatient/>}/>
                         <Route path='/profile-doctor/edit/:id' element={<EditDoctor/>}/>
                         <Route path='/colleagues' element={<Colleagues/>}/>
+                        <Route path='*' element={<h1>not found</h1>}/>
                     </Route>
                     
                 </Routes>

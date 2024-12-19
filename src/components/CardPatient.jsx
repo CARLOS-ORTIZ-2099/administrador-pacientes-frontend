@@ -8,7 +8,6 @@ import { useEditForm } from "../hooks/useEditForm"
 export const CardPatient = ({patient}) => { 
 
   const {deletePatient} = usePatients() 
- /*  const sendDeletepatient = (id) => deletePatient(id) */
   const {fieldsActive, setFieldsActive, handlerFieldsActive} =  useEditForm()
 
   const showModal = (data) => {

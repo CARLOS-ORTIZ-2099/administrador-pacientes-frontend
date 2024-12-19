@@ -14,7 +14,7 @@ export const ModalEditPatient = ({isOpen, onClose, fields, handlerFields}) => {
     const saveChange = async() => {
         try { 
            await editPatient(fields) 
-           alert('creado')   
+           alert('editado correctamente')   
            onClose()
         }catch(error) {
             console.log(error);
